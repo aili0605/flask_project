@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="task.index.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Task Manager</h1>
+
+        <form action="/add_task" method="post"class="task-form">
+            <input type="text" name="task" placeholder="Enter a new task" required>
+            <button type="submit" class="btn">Add Task</button>
+        </form>
+        <ul class="task-list" >
+            {% for task in tasks%}
+            <li>
+                tasks = ['Buy groceries', 'Walk the dog', 'Finish homework']
+
+                <span>{{ task }}</span>
+                <form action="/delete_task" method="post" style="display: inline;">
+                    <input type="hidden" name="task" value="{{ task }}">
+                    <button type="submit" class="delete-btn">Delete</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
