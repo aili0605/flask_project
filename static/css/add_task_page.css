@@ -1,34 +1,22 @@
 body{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: aliceblue;
+    font-family: Arial, sans-serif;
+    background-color:rgb(220, 236, 247) ;
     display: flex;
     justify-content: center;
     align-items:center;
     height: 100vh;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
 }
-.wrapper{
-    display: flex;
-    width: 420px;
-    color: aquamarine;
-    background: brown;
+.grid-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    
+    color: rgb(19, 19, 62);
     
 
 }
-.wrapper h1{
-    font-size: 36px;
-    text-align: center;
-}
-.wrapper .input-box{
-    width: 100%;
-    height: 50px;
-
-}
 .container{
-    background: white;
+    background: rgb(99, 157, 159);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

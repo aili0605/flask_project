@@ -1,0 +1,10 @@
+.wrapper > div{
+    padding: 1em;
+    background-color: aqua;
+
+}
+.wrapper > div.light{
+    padding: 1em;
+    background-color:blue;
+
+}

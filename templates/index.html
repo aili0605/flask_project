@@ -1,12 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">                            
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/index.css">
-    <title>Login</title>
+            <title>To DO List</title>
+
 </head>
 <body>
-    
+    <div class="grid-container">
+        <div class="grid-element">
+            <h1>Welcome to your To-Do List, {{ session['username'] }}</h1>
+        </div>
+        <div class="grid-element">
+            <h3>Add a new task:</h3>
+            <form action="/add_task" method="POST">
+                <form action="{{ url_for('add_task') }}" method="POST">
+                    <button type="submit">Add Tasks</button>
+                </form>         
+
+        </div>
+        <div class="grid-element">
+            {% if session['username'] %}
+        <form action="{{ url_for('logout') }}" method="POST" style="display: inline;">
+        <button type="submit">logout</button>
+        </form>
+
+        {% else %}
+        <a href="{{ url_for('login') }}">logout</a>
+        {% endif %}
+        </div>
+    <div class="grid-task">
+        <h2>Your Tasks:</h2>
+        {% if tasks %}
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <strong>{{ task[2] }}</strong> 
+                <br>
+                Due Date: {{ task[3] }} 
+                <form action="/delete_task" method="POST" style="display: inline;">
+                    <input type="hidden" name="task_id" value="{{ task[0] }}"> 
+                    <button type="submit" class="delete-btn">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+        </ul>
+            {% else %}
+            <p>You have no tasks.</p>
+        {% endif %}
+        </div>
+    </div>
 </body>
 </html>

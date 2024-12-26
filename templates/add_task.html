@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/add_task.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Add Task</title>
+</head>
+<body> 
+    <div class="grid-container">
+        <h1>Add Task</h1>
+        <i class='bx bx-task'></i>
+    </div>
+        <div class="grid-element">
+            <form method="POST" action="{{ url_for('add_task') }}">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" required></textarea><br>
+
+                <label for="due_date">Due Date</label>
+                <input type="date" id="due_date" name="due_date" required><br>
+  
+                <label for="comment">Comment</label>
+                <textarea id="comment" name="comment" required></textarea><br>
+                <button type="submit">Add Task</button>
+            </form>
+        
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

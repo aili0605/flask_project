@@ -4,29 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager</title>
-    <link rel="stylesheet" href="task.index.css">
+    <link rel="stylesheet" href="task_index.css">
 </head>
 <body>
     <div class="container">
         <h1>Task Manager</h1>
 
-        <form action="/add_task" method="post"class="task-form">
-            <input type="text" name="task" placeholder="Enter a new task" required>
-            <button type="submit" class="btn">Add Task</button>
-        </form>
-        <ul class="task-list" >
-            {% for task in tasks%}
-            <li>
-                tasks = ['Buy groceries', 'Walk the dog', 'Finish homework']
+        <a href="{{ url_for('task_index') }}">
+            <button>Create Task</button>
+        </a>
 
-                <span>{{ task }}</span>
-                <form action="/delete_task" method="post" style="display: inline;">
-                    <input type="hidden" name="task" value="{{ task }}">
-                    <button type="submit" class="delete-btn">Delete</button>
-                </form>
-            </li>
+        <h2>Your Tasks</h2>
+        <ul>
+            {% for task in tasks %}
+                <li>{{ task.description }} - Due: {{ task.due_date }}
+                    <form action="{{ url_for('delete_task') }}" method="POST" style="display: inline;">
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
             {% endfor %}
         </ul>
+
+        <!-- Кнопка для отображения формы добавления задачи -->
+        <button onclick="document.getElementById('task-form').style.display = 'block';">Добавить задачу</button>
+
+        <!-- Форма для добавления задачи, скрыта по умолчанию -->
+        <div id="task-form" style="display:none;">
+            <h3>Добавить новую задачу</h3>
+            <form action="{{ url_for('add_task') }}" method="POST">
+                <label for="description">Описание задачи:</label>
+                <input type="text" id="description" name="description" required><br><br>
+    
+                <label for="due_date">Дата выполнения:</label>
+                <input type="date" id="due_date" name="due_date" required><br><br>
+    
+                <button type="submit">Добавить задачу</button>
+                <button type="button" onclick="document.getElementById('task-form').style.display = 'none';">Отмена</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
